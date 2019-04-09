@@ -1,0 +1,58 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]%
+\ProvidesPackage{YQMbib}[2019/04/08 YQMlatexPacakge]%
+
+% options
+\DeclareOption{optBiber}{\def\optBiber{x}}%
+\DeclareOption{optBibtex}{\def\optBibtex{x}}%
+%
+\ProcessOptions\relax% End of option declaration
+%
+% Check, if a backend has been specified
+\ifdefined\optBiber%
+    \def\BackendSpecified{x}%
+\else\fi%
+\ifdefined\optBibtex%
+    \def\BackendSpecified{x}%
+\else\fi%
+%
+% Use numeric citation style as default
+\ifdefined\optBibstyleNumeric\else%
+\ifdefined\optBibstyleAlphabetic\else%
+\ifdefined\optBibstyleAuthorYear\else%
+    \def\optBibstyleNumeric{x}%
+\fi%
+\fi%
+\fi%
+%
+%
+% Perform rest only, if a backend has been specified
+\ifdefined\BackendSpecified%
+% Select backend
+% --------------
+\ifdefined\optBiber% Load biblatex package with biber as backend
+    \PassOptionsToPackage{backend=biber}{biblatex}%
+\else\fi%
+\ifdefined\optBibtex% Load biblatex package with bibtex as backend
+    \PassOptionsToPackage{backend=bibtex}{biblatex}%
+\else\fi%
+%
+% Select citation style
+\PassOptionsToPackage{style=numeric-comp}{biblatex}%
+%
+% dependencies
+\RequirePackage{biblatex}%
+% Abbreviate first name with inits
+\@ifpackagelater{biblatex}{2016/03/13}%
+{%
+    \ExecuteBibliographyOptions{giveninits=true}% new option
+}%
+{%
+    \ExecuteBibliographyOptions{firstinits=true}% deprecated option
+}%
+%
+% Sorting
+% -------
+\ExecuteBibliographyOptions{sorting=nyt}%  Set sorting order
+\ExecuteBibliographyOptions{maxnames=99}%  Set maximum names of a reference
+\DeclareNameAlias{sortname}{family-given}% Sort by last name
+\DeclareNameAlias{default}{family-given}%  Print last name first

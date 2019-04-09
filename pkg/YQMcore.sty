@@ -1,0 +1,28 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]%
+\ProvidesPackage{YQMcore}[2019/04/08 YQMlatexPacakge]%
+
+% dependencies
+\PassOptionsToPackage{utf8}{inputenc}%  sets input encoding to UTF-8
+\RequirePackage{inputenc}%
+\RequirePackage{etoolbox}%              for parsing conditional expressions
+\RequirePackage{xparse}%                allows advanced command definitions
+\RequirePackage{silence}%               for suppressing warnings
+
+% Warning Filtering (occurs with biblatex and beamer class)
+\WarningFilter{biblatex}{Patching footnotes failed}
+
+% Printing misc information
+\def\ZLcoreLogInfo#1{\typeout{#1.}}%
+
+% Printing warnings
+\def\ZLcoreLogWarning#1{\typeout{LaTeX Warning: #1 on input line \the\inputlineno.}}%
+
+% Printing errors
+\def\ZLcoreLogError#1{\typeout{! #1.}}%
+
+\newcommand{\YQMcoreRepetition}[2]{\newcount\Step\Step=0\loop\ifnum\Step<#1\advance \Step by 1 {#2}\repeat}%
+
+% Suppress warning produced after including special PDF's (only use this command, if it is actually defined (since pdftex 1.40.15))
+\begingroup\expandafter\expandafter\expandafter\endgroup%
+\expandafter\ifx\csname pdfsuppresswarningpagegroup\endcsname\relax%
+\else\pdfsuppresswarningpagegroup=1\relax\fi%

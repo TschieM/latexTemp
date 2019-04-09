@@ -1,0 +1,40 @@
+\documentclass[YQMreport, % style
+							 optBiber   % bibliography tool
+							 ]{YQMlatex}%
+
+% Set paths
+\graphicspath{{figures/}}%
+\addbibresource{ref/literature.bib}%
+%
+\begin{document}%
+	% generate header with title, author, email, location and data
+  \YQMreportHeader{Examplar Report}{\exampleName}{\exampleEmail}{\exampleAddr}{\today}
+
+	\section{Section I}
+		\blindtext%
+
+	\section{Section II}
+		\subsection{Subsection 1}
+			Citation: \cite{dlr51175}\par%
+			Reference: \cref{fig:MyImage}\par%
+			\begin{figure}[htb]%
+			    \centering%
+			    %
+			    % Including .png
+			    \includegraphics[width=40mm]{figures/ImagePNG.png}%
+			    %
+			    \hspace*{5mm}%
+			    %
+			    % Including .pdf
+			    \includegraphics[width=40mm]{figures/ImagePDF.pdf}\par%
+			    %
+			    %
+			    \caption{Image description}%
+			    \label{fig:MyImage}%
+			\end{figure}
+		\subsection{Subsection 2}
+			\blindtext
+
+	\section{Literature}
+		\printbibliography[heading=none]%
+\end{document}

@@ -1,0 +1,24 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]%
+\ProvidesPackage{YQMref}[2019/04/08 YQMlatexPacakge]%
+
+% Pre-load packages before loading hyperref (trick to be able to load packages
+% before hyperref without modifying this package)
+\IfFileExists{pre_hyperref_packages.tex}{\input{pre_hyperref_packages.tex}}{}%
+%
+\RequirePackage{hyperref}%
+\RequirePackage{./pkg/YQMcolor}%
+%
+\hypersetup{%
+    %bookmarks=true,%
+    linkcolor=YQMBlue,%
+    citecolor=YQMBlue,%
+    urlcolor=YQMBlue,%
+    colorlinks=true
+}%
+
+% Set PDF meta data
+\newcommand{\YQMrefSetPDFMetadata}[6]{%
+    \hypersetup{pdftitle={#1},pdfsubject={#2},pdfauthor={#3},pdfkeywords={#4},pdfcreator={#5},pdfproducer={#6}}%
+}%
+\YQMrefSetPDFMetadata{}{}{}{}{YQMlatex project}{}%
+\urlstyle{same}%
